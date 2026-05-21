@@ -204,7 +204,7 @@ function updateCartUI() {
 
     if (cart.length === 0) {
         cartContainer.innerHTML = '<div class="cart-empty"><span class="cart-empty-icon">🍫</span>Your cart is empty</div>';
-        if (cartFooter) cartFooter.style.display = 'none';
+         if (cartFooter) cartFooter.style.display = 'none';
     } else {
         cartContainer.innerHTML = cart.map((item, index) => {
             const c = item.customizations;
@@ -638,6 +638,21 @@ function sendToWhatsApp() {
     openCheckout();
 }
 
+let selectedPriceFilter = 'all';
+function updatePriceFilter() {
+    selectedPriceFilter =
+        document.getElementById('priceFilter').value;
+
+    const activeTab =
+        document.querySelector('.filter-tab.active');
+
+    const activeCategory =
+        activeTab
+            ? activeTab.textContent.toLowerCase()
+            : 'all';
+
+    filterProducts(activeCategory);
+}
 // --- PRODUCT FILTERING ---
 function filterProducts(category, btn) {
     const grid = document.getElementById('productsGrid');
@@ -648,7 +663,22 @@ function filterProducts(category, btn) {
         btn.classList.add('active');
     }
 
-    const filtered = category === 'all' ? products : products.filter(p => p.category === category);
+    let filtered = category === 'all'
+    ? products
+    : products.filter(p => p.category === category);
+
+// PRICE FILTER
+if (selectedPriceFilter === 'under200') {
+    filtered = filtered.filter(p => p.price < 200);
+}
+else if (selectedPriceFilter === '200to500') {
+    filtered = filtered.filter(
+        p => p.price >= 200 && p.price <= 500
+    );
+}
+else if (selectedPriceFilter === 'above500') {
+    filtered = filtered.filter(p => p.price > 500);
+}
 
     grid.innerHTML = filtered.map(p => `
         <div class="product-card" onclick='openCustomizeModal(${JSON.stringify(p).replace(/'/g, "&#39;")})' style="cursor:pointer">
