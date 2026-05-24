@@ -977,6 +977,14 @@ async function trackOrder(id) {
         }
         return;
     }
+    // Validate Order ID format
+    if (!/^ORD-\d+$/.test(orderId)) {
+        if (trackError) {
+            trackError.textContent = 'Invalid Order ID. Format should be ORD-XXXX';
+            trackError.classList.add('show');
+        }
+        return;
+    }
 
     try {
         const res = await fetch(`${API_BASE}/orders/${orderId}`);
