@@ -1,5 +1,5 @@
 // ============================================================
-//  BROWNIE BLISS — script.js  (fully fixed & consolidated)
+//  BROWNIE BLISS — script.js  (fully merged & conflict-free)
 // ============================================================
 
 // --- CONFIG ---
@@ -55,18 +55,18 @@ const BIRTHDAY_BASE_PRICES = {
 };
 
 const BIRTHDAY_FALLBACKS = {
-    'Red Velvet':   { img: 'https://theobroma.in/cdn/shop/files/redvelvet-theo.jpg?v=1701321860',                                                               emoji: '🎂' },
-    'Dutch Truffle':{ img: 'https://tse2.mm.bing.net/th/id/OIP.RFIPPxLpOU7C0ryaVA5hMwHaHa?pid=Api&P=0&h=180',                                                  emoji: '🍰' },
-    'Pineapple':    { img: 'https://theobroma.in/cdn/shop/files/FreshCreamPineappleCakehalfkg_400x400.jpg?v=1711124785',                                         emoji: '🍍' },
-    'Chocoholic':   { img: 'https://theobroma.in/cdn/shop/files/ChocoholicPastry_400x400.jpg?v=1711096267',                                                      emoji: '🍫' },
-    'Black Forest': { img: 'https://sweetandsavorymeals.com/wp-content/uploads/2020/02/black-forest-cake-recipe-SweetAndSavoryMeals4-1054x1536.jpg',            emoji: '🌲' },
-    'Cheesecake':   { img: 'https://www.inspiredtaste.net/wp-content/uploads/2024/03/New-York-Cheesecake-Recipe-1.jpg',                                         emoji: '🧀' }
+    'Red Velvet':    { img: 'https://theobroma.in/cdn/shop/files/redvelvet-theo.jpg?v=1701321860',                                                               emoji: '🎂' },
+    'Dutch Truffle': { img: 'https://tse2.mm.bing.net/th/id/OIP.RFIPPxLpOU7C0ryaVA5hMwHaHa?pid=Api&P=0&h=180',                                                  emoji: '🍰' },
+    'Pineapple':     { img: 'https://theobroma.in/cdn/shop/files/FreshCreamPineappleCakehalfkg_400x400.jpg?v=1711124785',                                         emoji: '🍍' },
+    'Chocoholic':    { img: 'https://theobroma.in/cdn/shop/files/ChocoholicPastry_400x400.jpg?v=1711096267',                                                      emoji: '🍫' },
+    'Black Forest':  { img: 'https://sweetandsavorymeals.com/wp-content/uploads/2020/02/black-forest-cake-recipe-SweetAndSavoryMeals4-1054x1536.jpg',            emoji: '🌲' },
+    'Cheesecake':    { img: 'https://www.inspiredtaste.net/wp-content/uploads/2024/03/New-York-Cheesecake-Recipe-1.jpg',                                         emoji: '🧀' }
 };
 
 const DEFAULT_PRODUCTS = [
-    { id: 1, name: 'Velvet Dream Cake',      category: 'cakes',    price: 850,  img: 'https://theobroma.in/cdn/shop/files/redvelvet-theo.jpg?v=1701321860' },
-    { id: 2, name: 'Dutch Truffle Delight',  category: 'cakes',    price: 950,  img: 'https://tse3.mm.bing.net/th/id/OIP.6wMpc_E6xsHLl3zT2ItBSQHaHa?pid=Api&P=0&h=180' },
-    { id: 3, name: 'Pineapple Fresh Cream',  category: 'cakes',    price: 675,  img: 'https://theobroma.in/cdn/shop/files/FreshCreamPineappleCakehalfkg_400x400.jpg' }
+    { id: 1, name: 'Velvet Dream Cake',      category: 'cakes', price: 850,  img: 'https://theobroma.in/cdn/shop/files/redvelvet-theo.jpg?v=1701321860' },
+    { id: 2, name: 'Dutch Truffle Delight',  category: 'cakes', price: 950,  img: 'https://tse3.mm.bing.net/th/id/OIP.6wMpc_E6xsHLl3zT2ItBSQHaHa?pid=Api&P=0&h=180' },
+    { id: 3, name: 'Pineapple Fresh Cream',  category: 'cakes', price: 675,  img: 'https://theobroma.in/cdn/shop/files/FreshCreamPineappleCakehalfkg_400x400.jpg' }
 ];
 
 const DEFAULT_BDAY_CAKES = {
@@ -77,14 +77,14 @@ const DEFAULT_BDAY_CAKES = {
 const BROWNIE_BLISS_BAKERY = { id: 'brownie-bliss-main' };
 
 // Mutable state
-let products          = [];
-let bdayCakes         = {};
-let selectedFlavor    = 'Red Velvet';
-let selectedWeight    = '1.0';
+let products            = [];
+let bdayCakes           = {};
+let selectedFlavor      = 'Red Velvet';
+let selectedWeight      = '1.0';
 let selectedPriceFilter = 'all';
-let favourites        = loadFavourites();
-let cart              = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
-let checkoutState     = { name: '', phone: '', address: '', city: '', pincode: '', verified: false, currentStep: 1 };
+let favourites          = loadFavourites();
+let cart                = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+let checkoutState       = { name: '', phone: '', address: '', city: '', pincode: '', verified: false, currentStep: 1 };
 
 // ============================================================
 // FAVOURITES
@@ -140,8 +140,8 @@ function updateFavouritesCount() {
 }
 
 function renderFavouritesPage() {
-    const bakeryGrid  = document.getElementById('favouriteBakeriesGrid');
-    const dishesGrid  = document.getElementById('favouriteDishesGrid');
+    const bakeryGrid = document.getElementById('favouriteBakeriesGrid');
+    const dishesGrid = document.getElementById('favouriteDishesGrid');
     if (!bakeryGrid && !dishesGrid) return;
 
     if (bakeryGrid) {
@@ -229,30 +229,18 @@ async function loadProducts() {
         const data = await res.json();
 
         if (data.success && Array.isArray(data.products) && data.products.length) {
-            products  = data.products.filter(p => p.type === 'standard').map(p => ({
-                id:          p.id_ref,
-                name:        p.name,
-                category:    p.category,
-                price:       p.price,
-                emoji:       p.emoji,
-                img:         p.img,
-                description: p.description || ''
-            }));
-
-            bdayCakes = {};
-            data.products.filter(p => p.type === 'birthday').forEach(p => {
-                bdayCakes[p.id_ref] = { price: p.price, emoji: p.emoji, img: p.img };
-            });
+            buildCatalogFromList(data.products);
         } else {
             useFallbackProducts();
+            if (document.getElementById('productsGrid')) filterProducts('all');
+            if (document.getElementById('cakePrice'))    calculateBdayPrice();
         }
     } catch (e) {
         console.error('Error loading products from server:', e);
         useFallbackProducts();
+        if (document.getElementById('productsGrid')) filterProducts('all');
+        if (document.getElementById('cakePrice'))    calculateBdayPrice();
     }
-
-    if (document.getElementById('productsGrid')) filterProducts('all');
-    if (document.getElementById('cakePrice'))    calculateBdayPrice();
 }
 
 // ============================================================
@@ -354,7 +342,14 @@ function updateCartUI() {
     if (!cartContainer) return;
 
     if (cart.length === 0) {
-        cartContainer.innerHTML = '<div class="cart-empty"><span class="cart-empty-icon">🍫</span>Your cart is empty</div>';
+        cartContainer.innerHTML = `
+            <div class="cart-empty-state">
+                <div class="empty-cart-icon">🍫</div>
+                <h2>Your cart is empty</h2>
+                <p>Looks like you haven't added any brownies yet.</p>
+                <a href="products.html" class="shop-now-btn">Shop Now</a>
+            </div>
+        `;
         if (cartFooter) cartFooter.style.display = 'none';
         return;
     }
@@ -363,9 +358,9 @@ function updateCartUI() {
         const c = item.customizations;
         let customBadges = '';
         if (c) {
-            if (c.dietary)  customBadges += `<span class="cart-custom-badge">${c.dietary === 'eggless' ? '🌱 Eggless' : '🥚 Egg'}</span>`;
+            if (c.dietary)         customBadges += `<span class="cart-custom-badge">${c.dietary === 'eggless' ? '🌱 Eggless' : '🥚 Egg'}</span>`;
             if (c.toppings?.length) customBadges += c.toppings.map(t => `<span class="cart-custom-badge">+ ${t.name}</span>`).join('');
-            if (c.message)  customBadges += `<span class="cart-custom-badge cart-custom-msg">✉ "${c.message}"</span>`;
+            if (c.message)         customBadges += `<span class="cart-custom-badge cart-custom-msg">✉ "${c.message}"</span>`;
         } else if (item.message) {
             customBadges = `<span class="cart-custom-badge cart-custom-msg">✉ "${item.message}"</span>`;
         }
@@ -547,7 +542,7 @@ async function sendOTP() {
     const name  = document.getElementById('custName').value.trim();
     const phone = document.getElementById('custPhone').value.trim();
 
-    if (!name)                                          { showToast('Please enter your name'); return; }
+    if (!name)                                               { showToast('Please enter your name'); return; }
     if (!phone || phone.length !== 10 || !/^\d+$/.test(phone)) { showToast('Enter a valid 10-digit phone number'); return; }
 
     checkoutState.name  = name;
@@ -558,9 +553,9 @@ async function sendOTP() {
 
     try {
         const res  = await fetch(`${API_BASE}/send-otp`, {
-            method: 'POST',
+            method:  'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ phone })
+            body:    JSON.stringify({ phone })
         });
         const data = await res.json();
         if (data.success) {
@@ -592,9 +587,9 @@ async function verifyOTP() {
 
     try {
         const res  = await fetch(`${API_BASE}/verify-otp`, {
-            method: 'POST',
+            method:  'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ phone: checkoutState.phone, otp })
+            body:    JSON.stringify({ phone: checkoutState.phone, otp })
         });
         const data = await res.json();
         if (data.success) {
@@ -615,13 +610,13 @@ function goToConfirm() {
     const city = document.getElementById('custCity').value.trim();
     const pin  = document.getElementById('custPin').value.trim();
 
-    if (!addr)                     { showToast('Enter your street address'); return; }
-    if (!city)                     { showToast('Enter your city'); return; }
-    if (!pin || pin.length !== 6)  { showToast('Enter valid 6-digit pincode'); return; }
+    if (!addr)                    { showToast('Enter your street address'); return; }
+    if (!city)                    { showToast('Enter your city'); return; }
+    if (!pin || pin.length !== 6) { showToast('Enter valid 6-digit pincode'); return; }
 
-    checkoutState.address  = addr;
-    checkoutState.city     = city;
-    checkoutState.pincode  = pin;
+    checkoutState.address = addr;
+    checkoutState.city    = city;
+    checkoutState.pincode = pin;
 
     document.getElementById('confirmCustomer').innerHTML = `
         <div style="font-weight:600;color:var(--brown-dark)">${checkoutState.name}</div>
@@ -643,7 +638,7 @@ function goToConfirm() {
 window.goToConfirm = goToConfirm;
 
 async function placeOrder() {
-    const itemsSnap = cart.map(i => ({ ...i }));        // snapshot before clearing
+    const itemsSnap  = cart.map(i => ({ ...i }));
     const orderTotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
     const orderData = {
@@ -666,9 +661,9 @@ async function placeOrder() {
 
     try {
         const res  = await fetch(`${API_BASE}/orders`, {
-            method: 'POST',
+            method:  'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(orderData)
+            body:    JSON.stringify(orderData)
         });
         const data = await res.json();
         if (data.success) {
@@ -703,10 +698,10 @@ function sendWhatsAppFinal(orderId, itemsSnap, orderTotal) {
         if (i.customizations) {
             const c       = i.customizations;
             const details = [];
-            if (c.dietary) details.push(c.dietary === 'eggless' ? 'Eggless' : 'Egg');
+            if (c.dietary)        details.push(c.dietary === 'eggless' ? 'Eggless' : 'Egg');
             if (c.toppings?.length) details.push(c.toppings.map(t => `+${t.name}`).join(', '));
-            if (c.message) details.push(`Msg: "${c.message}"`);
-            if (details.length) line += `\n   _${details.join(' | ')}_`;
+            if (c.message)        details.push(`Msg: "${c.message}"`);
+            if (details.length)   line += `\n   _${details.join(' | ')}_`;
         } else if (i.message) {
             line += `\n   _Msg: "${i.message}"_`;
         }
@@ -760,7 +755,7 @@ function setCakeWeight(weight, event) {
 window.setCakeWeight = setCakeWeight;
 
 function calculateBdayPrice() {
-    const price  = BIRTHDAY_BASE_PRICES[selectedWeight] || 850;
+    const price   = BIRTHDAY_BASE_PRICES[selectedWeight] || 850;
     const priceEl = document.getElementById('cakePrice');
     if (priceEl) priceEl.textContent = `₹ ${price}`;
     updateBirthdayFavouriteButton();
@@ -772,7 +767,7 @@ function getBirthdayFavouriteItem() {
         id:       `bday-${selectedFlavor}-${selectedWeight}`,
         name:     `${selectedFlavor} Cake (${selectedWeight}kg)`,
         price:    BIRTHDAY_BASE_PRICES[selectedWeight] || 850,
-        img:      cake.img  || document.getElementById('birthdayCakeImg')?.src || '',
+        img:      cake.img   || document.getElementById('birthdayCakeImg')?.src || '',
         emoji:    cake.emoji || '🎂',
         category: 'cakes'
     };
@@ -889,7 +884,7 @@ function renderOrderDetails(order) {
                 const el = document.getElementById(`step-${s}`);
                 if (!el) return;
                 el.classList.remove('active', 'completed');
-                if (i < currentIndex) el.classList.add('completed');
+                if (i < currentIndex)  el.classList.add('completed');
                 else if (i === currentIndex) el.classList.add('active');
             });
         }
@@ -902,11 +897,20 @@ function renderOrderDetails(order) {
 function showToast(msg) {
     const t = document.getElementById('toast');
     if (!t) return;
-    t.innerHTML = msg;          // innerHTML to allow the track-order anchor
+    t.innerHTML = msg;   // innerHTML to allow the track-order anchor
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 3500);
 }
 window.showToast = showToast;
+
+// ============================================================
+// MOBILE MENU — close on link click
+// ============================================================
+document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('mobileMenu')?.classList.remove('show');
+    });
+});
 
 // ============================================================
 // INIT
@@ -916,7 +920,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartUI();
     updateFavouritesCount();
     renderFavouritesPage();
-    loadProducts();                                         // fetches products then re-renders grid & bday block
+    loadProducts();   // fetches products, then re-renders grid & birthday block
     updateFavouriteButtons('bakeries', BROWNIE_BLISS_BAKERY.id);
 
     // Auto-fill track page from URL param
