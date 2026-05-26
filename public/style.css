@@ -8916,8 +8916,6 @@ a.logo {
   font-size: 13px !important;
   border-radius: 6px !important;
   background: var(--gold) !important;
-
- .some-class {
   color: var(--brown-dark) !important;
 }
 
@@ -10396,8 +10394,200 @@ button,
     transform: scale(1.1);
 }
 
-/* LEGAL PAGES */
+/* ============================================================
+   DARK MODE FINAL PATCH — Brownie Bliss
+============================================================ */
 
+html.dark,
+html.dark body {
+  background: var(--cream) !important;
+  color: var(--text-dark) !important;
+}
+
+/* Keep the announcement bar readable against the dark theme palette. */
+html.dark .announcement {
+  background: #2a140b !important;
+  color: #f6deb0 !important;
+  text-shadow: 0 1px 4px rgba(17, 9, 4, 0.45);
+}
+
+/* Header / navbar */
+html.dark header,
+html.dark .navbar,
+html.dark .mobile-menu {
+  background: var(--white) !important;
+  border-color: #3a2010 !important;
+}
+
+html.dark .logo-name,
+html.dark .brand-name,
+html.dark nav a,
+html.dark .mobile-menu a {
+  color: var(--text-dark) !important;
+}
+
+html.dark .logo-sub,
+html.dark .brand-tagline {
+  color: var(--gold) !important;
+}
+
+/* Sections */
+html.dark .products-section,
+html.dark .categories-section,
+html.dark .birthday-section,
+html.dark .favourites-page,
+html.dark .contact-page,
+html.dark .page-header,
+html.dark .track-content-wrapper {
+  background: var(--cream) !important;
+  color: var(--text-dark) !important;
+}
+
+/* Cards */
+html.dark .product-card,
+html.dark .birthday-card,
+html.dark .contact-card,
+html.dark .review-card,
+html.dark .testimonial-card,
+html.dark .stat-card,
+html.dark .orders-panel,
+html.dark .login-box,
+html.dark .cart-sidebar,
+html.dark .checkout-modal,
+html.dark .track-container,
+html.dark #result,
+html.dark .favourite-bakery-card {
+  background: var(--white) !important;
+  color: var(--text-dark) !important;
+  border-color: #3a2010 !important;
+}
+
+/* Text */
+html.dark .section-title,
+html.dark .section-title em,
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark .product-name,
+html.dark .product-title,
+html.dark .cart-title,
+html.dark .checkout-title,
+html.dark .track-container h2 {
+  color: var(--text-dark) !important;
+}
+
+html.dark p,
+html.dark .product-desc,
+html.dark .checkout-subtitle,
+html.dark .track-subtitle,
+html.dark .favourites-intro,
+html.dark .contact-text,
+html.dark .review-text {
+  color: var(--text-mid) !important;
+}
+
+html.dark .section-label,
+html.dark .product-category,
+html.dark .product-price,
+html.dark #cakePrice,
+html.dark .stars {
+  color: var(--gold) !important;
+}
+
+/* Inputs */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background: var(--cream-dark) !important;
+  color: var(--text-dark) !important;
+  border-color: #3a2010 !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #9b7b5c !important;
+}
+
+/* Buttons */
+html.dark .cart-btn,
+html.dark .theme-toggle-btn,
+html.dark .filter-tab {
+  color: var(--text-dark) !important;
+  border-color: var(--gold) !important;
+}
+
+html.dark .hero-cta,
+html.dark .add-to-cart,
+html.dark .whatsapp-btn,
+html.dark .login-btn,
+html.dark .track-container button,
+html.dark .filter-tab.active,
+html.dark .filter-tab:hover {
+  background: var(--gold) !important;
+  color: var(--brown-dark) !important;
+  border-color: var(--gold) !important;
+}
+
+/* Cart */
+html.dark .cart-item {
+  background: var(--cream-dark) !important;
+  border-color: #3a2010 !important;
+}
+
+html.dark .cart-close,
+html.dark .cart-item-remove {
+  color: var(--text-dark) !important;
+}
+
+/* Checkout */
+html.dark .checkout-overlay,
+html.dark .cart-overlay,
+html.dark .customize-overlay {
+  background: rgba(0, 0, 0, 0.75) !important;
+}
+
+html.dark .confirm-section,
+html.dark .confirm-summary {
+  background: var(--cream-dark) !important;
+  border-color: #3a2010 !important;
+}
+
+/* Favourites */
+html.dark .favorite-btn {
+  background: #2b1a0c !important;
+  color: var(--gold) !important;
+  border-color: #5a3820 !important;
+}
+
+html.dark .favorite-btn.active {
+  background: var(--gold) !important;
+  color: var(--brown-dark) !important;
+}
+
+/* Admin */
+html.dark .admin-page,
+html.dark .admin-body {
+  background: var(--cream) !important;
+  color: var(--text-dark) !important;
+}
+
+html.dark table,
+html.dark th,
+html.dark td {
+  background: var(--white) !important;
+  color: var(--text-dark) !important;
+  border-color: #3a2010 !important;
+}
+
+/* Toast */
+html.dark .toast {
+  background: #1a1008 !important;
+  color: var(--text-dark) !important;
+  border: 1px solid #3a2010 !important;
+}
+
+/* LEGAL PAGES */
 .legal-container {
   max-width: 1100px;
   margin: 0 auto;
@@ -10417,13 +10607,13 @@ button,
   height: 100%;
   padding: 32px;
   transition: all 0.35s ease;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
 }
 
 .legal-card:hover {
   transform: translateY(-8px) scale(1.01);
   border-color: var(--gold);
-  box-shadow: 0 18px 45px rgba(0,0,0,0.08);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
 }
 
 .legal-card h2 {
@@ -10476,4 +10666,27 @@ button,
   transform: translateY(-4px) scale(1.03);
   box-shadow: 0 18px 35px rgba(212, 175, 55, 0.35);
   background: #e6c14d;
+}
+
+html.dark .legal-hero {
+  background: linear-gradient(
+    to bottom,
+    var(--cream),
+    var(--cream-dark)
+  );
+}
+
+html.dark .legal-card {
+  background: var(--white);
+  color: var(--text-dark);
+  border-color: #3a2010;
+}
+
+html.dark .legal-card h2 {
+  color: var(--text-dark);
+}
+
+html.dark .legal-card p,
+html.dark .legal-hero p {
+  color: var(--text-mid);
 }
