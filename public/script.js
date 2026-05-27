@@ -1556,3 +1556,11 @@ function initStarRatings() {
     }
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateFavouritesCount();
+
+  renderFavouritesPage();
+
+  updateFavouriteButtons('bakeries', BROWNIE_BLISS_BAKERY.id);
+});
